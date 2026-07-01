@@ -11,18 +11,10 @@ export function middleware(request: NextRequest) {
   response.headers.set("X-XSS-Protection", "1; mode=block");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   
-  // Content Security Policy (CSP) - balanced for modern apps
+  // Content Security Policy (CSP) - balanced for modern apps (single line)
   response.headers.set(
     "Content-Security-Policy",
-    `default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data: blob: https:;
-    font-src 'self' data:;
-    connect-src 'self' https:;
-    frame-ancestors 'self';
-    base-uri 'self';
-    form-action 'self';`
+    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
   );
 
   // Permissions Policy
