@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
   // the production serverless function stays small and deploys cleanly.
   serverExternalPackages: ["puppeteer", "puppeteer-core", "@sparticuz/chromium"],
   
+  outputFileTracingIncludes: {
+    "/api/screenshot": ["node_modules/@sparticuz/chromium/bin/**/*"],
+  },
+  
   // Production optimizations
   poweredByHeader: false,
   generateEtags: true,
