@@ -50,9 +50,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, data: safeResult });
   } catch (error: any) {
     console.error("🔥 API Screenshot Error:", error);
-    // Never expose internal error details to client
     return NextResponse.json(
-      { error: "Failed to process website" },
+      { 
+        error: "Failed to process website", 
+        details: error?.message || "Unknown error",
+        stack: error?.stack || ""
+      },
       { status: 500 }
     );
   }
