@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
   // `puppeteer` (full) is only used in local dev via a dynamic import; on Vercel
   // we use `puppeteer-core` + `@sparticuz/chromium`. Externalizing here ensures
   // the production serverless function stays small and deploys cleanly.
-  serverExternalPackages: ["puppeteer"],
+  serverExternalPackages: ["puppeteer", "puppeteer-core", "@sparticuz/chromium"],
   
   // Production optimizations
   poweredByHeader: false,
