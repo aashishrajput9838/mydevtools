@@ -11,8 +11,10 @@
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#tech-stack">Tech Stack</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#security">Security</a> •
+  <a href="#performance">Performance</a> •
   <a href="#getting-started">Getting Started</a> •
-  <a href="#project-structure">Project Structure</a> •
   <a href="#contributing">Contributing</a>
 </p>
 
@@ -64,6 +66,7 @@
 - **Database**: [Cloud Firestore](https://firebase.google.com/products/firestore)
 - **Image Storage**: [Cloudinary](https://cloudinary.com/) (Free Tier)
 - **Screenshot Engine**: [Puppeteer](https://pptr.dev/) (Headless Chrome)
+- **XSS Protection**: [DOMPurify](https://github.com/cure53/DOMPurify)
 
 ---
 
@@ -75,16 +78,23 @@ MyDevTools follows a professional, scalable architecture for maximum maintainabi
 src/
 ├── app/                 # Next.js App Router pages & APIs
 │   ├── api/            # Serverless API routes
-│   ├── (dashboard)/    # Protected dashboard routes
 │   └── page.tsx        # Landing page
 ├── components/         # React components
 │   ├── ui/             # Shadcn/UI atomic components
 │   ├── dashboard/      # Dashboard feature components
 │   ├── collections/    # Collection management components
-│   └── layout/         # Layout components (Navbar, Sidebar)
+│   └── layout/         # Layout components (Navbar, Sidebar, ThemeProvider, etc.)
 ├── context/            # React Context (Auth)
 ├── hooks/              # Custom hooks (useWebsites, useCollections)
-├── lib/                # Utilities, validators, constants
+├── lib/                # Utilities, validators, security helpers
+│   ├── utils/          # Split utils for maintainability
+│   │   ├── cn.ts
+│   │   ├── date.ts
+│   │   ├── string.ts
+│   │   └── index.ts
+│   ├── security.ts
+│   ├── validators.ts
+│   └── constants.ts
 ├── services/           # Business logic (Firestore, Screenshot)
 └── types/              # TypeScript type definitions
 ```
@@ -93,6 +103,30 @@ src/
 - **Custom Hooks**: Encapsulated business logic in `src/hooks/`
 - **Type Safety**: Strict TypeScript types from `src/types/`
 - **Utilities**: Reusable functions and validators in `src/lib/`
+
+---
+
+## 🔒 Security
+
+MyDevTools is built with security as a top priority:
+- **XSS Protection**: All user inputs sanitized using DOMPurify
+- **Security Headers**: CSP, X-Frame-Options, X-XSS-Protection, etc., Referrer-Policy, Permissions-Policy
+- **Firestore Rules**: Strict security rules ensuring users can only access their own data
+- **Environment Variables**: Secure credential management via `.env.local`
+- **Blocked Hosts**: Internal/localhost URLs blocked in screenshot API
+- **URL Validation**: Strict input validation for all user-provided URLs
+
+---
+
+## ⚡ Performance & Speed Optimizations
+
+The application is optimized for maximum performance:
+- **Next.js Image Component**: Automatic lazy loading, format conversion (WebP/AVIF), responsive sizing
+- **Aggressive Caching**: Images cached for 1 year; static assets cached appropriately
+- **SWC Minification**: Super-fast JavaScript/TypeScript compilation
+- **Turbopack**: Next.js 16 Turbopack enabled for lightning-fast builds
+- **Compression**: Gzip/Brotli enabled for all assets
+- **Powered-By Header**: Disabled for smaller response sizes
 
 ---
 
