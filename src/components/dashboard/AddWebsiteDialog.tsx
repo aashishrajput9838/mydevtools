@@ -69,7 +69,10 @@ export function AddWebsiteDialog() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to process website");
+        const errorMsg = result.details 
+          ? `${result.error || "Failed to process website"}: ${result.details}`
+          : (result.error || "Failed to process website");
+        throw new Error(errorMsg);
       }
 
       const { thumbnailUrl, title, description, faviconUrl } = result.data;
