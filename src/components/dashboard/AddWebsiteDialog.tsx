@@ -66,12 +66,18 @@ export function AddWebsiteDialog() {
         body: JSON.stringify({ url }),
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (e) {
+        throw new Error(`Server returned a non-JSON response (Status: ${response.status}). This could be a timeout.`);
+      }
 
       if (!response.ok) {
-        const errorMsg = result.details 
+        const errorMsg = result?.details 
           ? `${result.error || "Failed to process website"}: ${result.details}`
-          : (result.error || "Failed to process website");
+          : (result?.error || "Failed to process website");
         throw new Error(errorMsg);
       }
 

@@ -3,6 +3,8 @@ import { ScreenshotService } from "@/services/screenshot";
 import { validateUrl } from "@/lib/validators";
 import { sanitizeHostname } from "@/lib/security";
 
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
