@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
   
   // Turbopack is enabled by default in Next.js 16
   turbopack: {},
+
+  // Keep heavy native deps out of the serverless bundle for the screenshot route.
+  // `puppeteer` (full) is only used in local dev via a dynamic import; on Vercel
+  // we use `puppeteer-core` + `@sparticuz/chromium`. Externalizing here ensures
+  // the production serverless function stays small and deploys cleanly.
+  serverExternalPackages: ["puppeteer"],
   
   // Production optimizations
   poweredByHeader: false,

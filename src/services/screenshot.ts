@@ -1,4 +1,3 @@
-import puppeteer from "puppeteer";
 import puppeteerCore from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 import { v2 as cloudinary } from "cloudinary";
@@ -44,7 +43,10 @@ export const ScreenshotService = {
           headless: true,
         });
       } else {
-        // Local development: use regular puppeteer
+        // Local development: dynamically import regular puppeteer so the
+        // heavy package (with its bundled Chromium) is never loaded or
+        // bundled into the production serverless function on Vercel.
+        const puppeteer = (await import("puppeteer")).default;
         browser = await puppeteer.launch({
           headless: true,
           args: [
