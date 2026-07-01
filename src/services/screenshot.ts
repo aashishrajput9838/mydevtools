@@ -62,7 +62,7 @@ export const ScreenshotService = {
       await page.setViewport({ width: 1200, height: 800 });
 
       console.log("🌐 Navigating to:", url);
-      await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
 
       console.log("📸 Capturing screenshot...");
       const screenshotBuffer = await page.screenshot({ 
