@@ -1,3 +1,4 @@
+import puppeteer from "puppeteer";
 import puppeteerCore from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 import { v2 as cloudinary } from "cloudinary";
@@ -33,13 +34,27 @@ export const ScreenshotService = {
       console.log("🚀 Launching Puppeteer for:", hostname);
       
       // Check if we're in production (Vercel)
-      const isProd = process.env.NODE_ENV === "production";
+      const isProd = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
       
-      browser = await puppeteerCore.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath(),
-        headless: true,
-      });
+      if (isProd) {
+        // Vercel production: use @sparticuz/chromium
+        browser = await puppeteerCore.launch({
+          args: chromium.args,
+          executablePath: await chromium.executablePath(),
+          headless: true,
+        });
+      } else {
+        // Local development: use regular puppeteer
+        browser = await puppeteer.launch({
+          headless: true,
+          args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+          ],
+        });
+      }
 
       const page = await browser.newPage();
       await page.setViewport({ width: 1200, height: 800 });
