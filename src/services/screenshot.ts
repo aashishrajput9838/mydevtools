@@ -62,7 +62,13 @@ export const ScreenshotService = {
       await page.setViewport({ width: 1200, height: 800 });
 
       console.log("🌐 Navigating to:", url);
-      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
+      try {
+        // We give it 6 seconds to load. If it doesn't finish, we catch the error 
+        // and take a screenshot of whatever is on the screen anyway!
+        await page.goto(url, { waitUntil: "networkidle2", timeout: 6000 });
+      } catch (e) {
+        console.log("⚠️ Page load timed out after 6s, taking screenshot of current state...");
+      }
 
       console.log("📸 Capturing screenshot...");
       const screenshotBuffer = await page.screenshot({ 
