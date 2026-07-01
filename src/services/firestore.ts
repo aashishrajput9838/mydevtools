@@ -20,15 +20,7 @@ import {
   validateCollectionDescription,
   validateWebsiteName 
 } from "@/lib/validators";
-
-/**
- * Sanitize string input to prevent XSS and excessive length
- */
-const sanitizeString = (str: string | undefined, maxLength: number = 2000): string => {
-  if (!str) return "";
-  const trimmed = str.trim();
-  return trimmed.slice(0, maxLength);
-};
+import { sanitizeXSS, sanitizeUrl } from "@/lib/security";
 
 /**
  * Service for handling all Firestore operations related to Websites and Collections.
@@ -79,13 +71,13 @@ export const FirestoreService = {
     // Sanitize inputs
     const sanitizedData = {
       ...websiteData,
-      websiteName: sanitizeString(websiteData.websiteName, 200),
-      url: sanitizeString(websiteData.url, 2048),
-      thumbnailUrl: sanitizeString(websiteData.thumbnailUrl, 2048),
-      faviconUrl: sanitizeString(websiteData.faviconUrl, 500),
-      websiteTitle: sanitizeString(websiteData.websiteTitle, 500),
-      websiteDescription: sanitizeString(websiteData.websiteDescription, 2000),
-      tags: websiteData.tags ? websiteData.tags.slice(0, 20).map(tag => sanitizeString(tag, 50)) : [],
+      websiteName: sanitizeXSS(websiteData.websiteName, 200),
+      url: sanitizeUrl(websiteData.url),
+      thumbnailUrl: sanitizeUrl(websiteData.thumbnailUrl),
+      faviconUrl: sanitizeUrl(websiteData.faviconUrl),
+      websiteTitle: sanitizeXSS(websiteData.websiteTitle, 500),
+      websiteDescription: sanitizeXSS(websiteData.websiteDescription, 2000),
+      tags: websiteData.tags ? websiteData.tags.slice(0, 20).map(tag => sanitizeXSS(tag, 50)) : [],
       isFavorite: !!websiteData.isFavorite,
     };
 
@@ -111,19 +103,19 @@ export const FirestoreService = {
       if (!nameValidation.valid) {
         throw new Error(nameValidation.error || "Invalid website name");
       }
-      allowedUpdates.websiteName = sanitizeString(data.websiteName, 200);
+      allowedUpdates.websiteName = sanitizeXSS(data.websiteName, 200);
     }
     
     if (data.websiteTitle !== undefined) {
-      allowedUpdates.websiteTitle = sanitizeString(data.websiteTitle, 500);
+      allowedUpdates.websiteTitle = sanitizeXSS(data.websiteTitle, 500);
     }
     
     if (data.websiteDescription !== undefined) {
-      allowedUpdates.websiteDescription = sanitizeString(data.websiteDescription, 2000);
+      allowedUpdates.websiteDescription = sanitizeXSS(data.websiteDescription, 2000);
     }
     
     if (data.tags !== undefined) {
-      allowedUpdates.tags = data.tags.slice(0, 20).map(tag => sanitizeString(tag, 50));
+      allowedUpdates.tags = data.tags.slice(0, 20).map(tag => sanitizeXSS(tag, 50));
     }
     
     if (data.isFavorite !== undefined) {
@@ -131,7 +123,7 @@ export const FirestoreService = {
     }
     
     if (data.collectionId !== undefined) {
-      allowedUpdates.collectionId = sanitizeString(data.collectionId, 100);
+      allowedUpdates.collectionId = sanitizeXSS(data.collectionId, 100);
     }
 
     const docRef = doc(db, "websites", id);
@@ -222,8 +214,8 @@ export const FirestoreService = {
     // Sanitize inputs
     const sanitizedData = {
       userId,
-      name: sanitizeString(name, 100),
-      description: sanitizeString(description, 500),
+      name: sanitizeXSS(name, 100),
+      description: sanitizeXSS(description, 500),
     };
 
     return addDoc(collection(db, "collections"), {

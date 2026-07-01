@@ -16,12 +16,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
+import { useCollections } from "@/hooks/useCollections";
 
 export function CreateCollectionDialog() {
   const { user } = useAuth();
+  const { addCollection } = useCollections();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -34,12 +34,7 @@ export function CreateCollectionDialog() {
     setLoading(true);
 
     try {
-      await addDoc(collection(db, "collections"), {
-        userId: user.uid,
-        name,
-        description,
-        createdAt: serverTimestamp(),
-      });
+      await addCollection(name, description);
 
       toast.success("Collection created successfully!");
       setOpen(false);
@@ -47,7 +42,7 @@ export function CreateCollectionDialog() {
       setDescription("");
     } catch (error: any) {
       console.error(error);
-      toast.error(error.message || "Failed to create collection");
+      toast.error("Failed to create collection");
     } finally {
       setLoading(false);
     }

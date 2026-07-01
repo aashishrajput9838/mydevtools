@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ScreenshotService } from "@/services/screenshot";
 import { validateUrl } from "@/lib/validators";
+import { sanitizeHostname } from "@/lib/security";
 
 export async function POST(req: NextRequest) {
   try {
-    const { url } = await req.json();
+    const body = await req.json();
+    const url = body?.url;
 
-    if (!url) {
+    if (!url || typeof url !== "string") {
       return NextResponse.json(
         { error: "URL is required" },
         { status: 400 }
@@ -26,7 +28,7 @@ export async function POST(req: NextRequest) {
     const parsedUrl = new URL(url);
     
     // Block internal/localhost URLs for security
-    const hostname = parsedUrl.hostname;
+    const hostname = sanitizeHostname(parsedUrl.hostname);
     const blockedHosts = ['localhost', '127.0.0.1', '0.0.0.0', '::1'];
     if (blockedHosts.includes(hostname) || hostname.includes('internal') || hostname.includes('private')) {
       return NextResponse.json(
@@ -48,8 +50,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, data: safeResult });
   } catch (error: any) {
     console.error("🔥 API Screenshot Error:", error);
+    // Never expose internal error details to client
     return NextResponse.json(
-      { error: error.message || "Failed to process website" },
+      { error: "Failed to process website" },
       { status: 500 }
     );
   }
