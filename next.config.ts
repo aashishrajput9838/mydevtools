@@ -21,10 +21,11 @@ const nextConfig: NextConfig = {
         hostname: "www.google.com",
       },
     ],
+    formats: ["image/webp", "image/avif"],
     // Reduce image quality slightly for faster load times
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    minimumCacheTTL: 86400, // Cache images for 1 day
+    minimumCacheTTL: 31536000, // Cache images for 1 year
   },
   
   // Compression
@@ -32,6 +33,10 @@ const nextConfig: NextConfig = {
   
   // Turbopack is enabled by default in Next.js 16
   turbopack: {},
+  
+  // Production optimizations
+  poweredByHeader: false,
+  generateEtags: true,
   
   // Security Headers
   async headers() {
@@ -66,6 +71,15 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self';",
+          },
+        ],
+      },
+      {
+        source: "/favicon.ico",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400",
           },
         ],
       },
