@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import puppeteerCore from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
@@ -30,14 +31,14 @@ export const ScreenshotService = {
       const hostname = urlObj.hostname;
 
       console.log("🚀 Launching Puppeteer for:", hostname);
-      browser = await puppeteer.launch({
+      
+      // Check if we're in production (Vercel)
+      const isProd = process.env.NODE_ENV === "production";
+      
+      browser = await puppeteerCore.launch({
+        args: chromium.args,
+        executablePath: await chromium.executablePath(),
         headless: true,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-gpu",
-        ],
       });
 
       const page = await browser.newPage();
