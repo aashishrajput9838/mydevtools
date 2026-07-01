@@ -119,7 +119,7 @@ export default function SettingsPage() {
                   <Moon className="h-5 w-5" />
                   Appearance
                 </CardTitle>
-                <CardDescription>Customize how MyWebTools looks on your device.</CardDescription>
+                <CardDescription>Customize how MyDevTools looks on your device.</CardDescription>
               </CardHeader>
               <CardContent className="flex items-center justify-between rounded-lg border p-4">
                 <div>

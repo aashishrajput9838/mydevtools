@@ -1,9 +1,9 @@
-# AI-CONTEXT: MyWebTools Project
+# AI-CONTEXT: MyDevTools Project
 
-This document provides a comprehensive, up-to-date overview of the MyWebTools project for AI agents. It covers the architecture, tech stack, database schema, and development conventions.
+This document provides a comprehensive, up-to-date overview of the MyDevTools project for AI agents. It covers the architecture, tech stack, database schema, and development conventions.
 
 ## 1. Project Overview
-**MyWebTools** is a premium website inspiration gallery. It allows users to:
+**MyDevTools** is a premium website inspiration gallery. It allows users to:
 - Save website URLs.
 - Automatically generate screenshots using Puppeteer.
 - Extract site metadata (Title, Description, Favicon).

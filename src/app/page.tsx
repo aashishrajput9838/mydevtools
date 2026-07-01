@@ -51,7 +51,7 @@ export default function Home() {
             <div className="mb-16 text-center">
               <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Everything you need to stay inspired</h2>
               <p className="mx-auto max-w-2xl text-muted-foreground">
-                MyWebTools provides all the tools you need to capture, organize, and revisit the websites that inspire your next project.
+                MyDevTools provides all the tools you need to capture, organize, and revisit the websites that inspire your next project.
               </p>
             </div>
             
@@ -100,7 +100,7 @@ export default function Home() {
                   <span className="text-2xl font-bold">1</span>
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">Paste URL</h3>
-                <p className="text-muted-foreground">Copy the URL of any website you find inspiring and paste it into MyWebTools.</p>
+                <p className="text-muted-foreground">Copy the URL of any website you find inspiring and paste it into MyDevTools.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -126,7 +126,7 @@ export default function Home() {
             <h2 className="mb-16 text-center text-3xl font-bold lg:text-4xl">Loved by designers worldwide</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <TestimonialCard 
-                quote="MyWebTools has completely changed how I collect inspiration. It's so much faster than taking manual screenshots."
+                quote="MyDevTools has completely changed how I collect inspiration. It's so much faster than taking manual screenshots."
                 author="Sarah Jenkins"
                 role="Senior UI Designer"
               />
@@ -159,7 +159,7 @@ export default function Home() {
               />
               <FAQItem 
                 question="Do you support full-page screenshots?"
-                answer="Absolutely! MyWebTools captures the entire homepage so you can see the full layout and design patterns."
+                answer="Absolutely! MyDevTools captures the entire homepage so you can see the full layout and design patterns."
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function Home() {
             <div className="mx-auto max-w-2xl">
               <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Ready to build your inspiration library?</h2>
               <p className="mb-10 text-xl text-muted-foreground">
-                Join thousands of designers and developers who use MyWebTools to stay inspired.
+                Join thousands of designers and developers who use MyDevTools to stay inspired.
               </p>
               <Button size="lg" className="h-12 px-8 text-lg" asChild>
                 <Link href="/dashboard">

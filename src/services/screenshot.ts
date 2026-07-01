@@ -67,7 +67,7 @@ export const ScreenshotService = {
       const uploadResult = await new Promise<any>((resolve, reject) => {
         cloudinary.uploader.upload_stream(
           {
-            folder: "mywebtools-screenshots",
+            folder: "mydevtools-screenshots",
             resource_type: "image",
           },
           (error, result) => {

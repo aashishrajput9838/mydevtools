@@ -1,10 +1,10 @@
 /**
- * Global constants and configuration for MyWebTools
+ * Global constants and configuration for MyDevTools
  */
 export const APP_CONFIG = {
-  NAME: "mywebtools",
+  NAME: "mydevtools",
   DESCRIPTION: "Save and Organize Your Favorite Website Inspirations",
-  URL: "https://mywebtools.com",
+  URL: "https://mydevtools.com",
 };
 
 export const API_ROUTES = {

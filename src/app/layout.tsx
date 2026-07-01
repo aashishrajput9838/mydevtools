@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: `${APP_CONFIG.NAME} - ${APP_CONFIG.DESCRIPTION}`,
   description: "Build your personal library of beautiful websites, UI patterns, and design inspirations.",
   keywords: ["design", "ui", "ux", "inspiration", "web design", "developer tools"],
-  authors: [{ name: "mywebtools Team" }],
+  authors: [{ name: "mydevtools Team" }],
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://mywebtools-d663d.web.app/logo.png" alt="MyWebTools Logo" width="120" height="120" />
+  <img src="https://mydevtools-d663d.web.app/logo.png" alt="MyDevTools Logo" width="120" height="120" />
 </p>
 
-<h1 align="center">✨ MyWebTools - Premium Website Inspiration Gallery</h1>
+<h1 align="center">✨ MyDevTools - Premium Website Inspiration Gallery</h1>
 
 <p align="center">
   A sophisticated platform for designers and developers to capture, organize, and curate website inspirations effortlessly.
@@ -29,7 +29,7 @@
 ## 🌟 Preview
 
 <p align="center">
-  <img src="https://res.cloudinary.com/demkeuigf/image/upload/v1782913503/mywebtools-screenshot/preview.png" alt="MyWebTools Preview" width="800" />
+  <img src="https://res.cloudinary.com/demkeuigf/image/upload/v1782913503/mydevtools-screenshot/preview.png" alt="MyDevTools Preview" width="800" />
 </p>
 
 ---
@@ -69,7 +69,7 @@
 
 ## 🏗️ Architecture
 
-MyWebTools follows a professional, scalable architecture for maximum maintainability:
+MyDevTools follows a professional, scalable architecture for maximum maintainability:
 
 ```
 src/
@@ -105,8 +105,8 @@ src/
 
 ### 1. Installation
 ```bash
-git clone https://github.com/aashishrajput9838/mywebtools.git
-cd mywebtools
+git clone https://github.com/aashishrajput9838/mydevtools.git
+cd mydevtools
 npm install
 ```
 

@@ -10,7 +10,7 @@ export function Footer() {
               <div className="h-6 w-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
                 M
               </div>
-              <span className="text-lg font-bold tracking-tight">MyWebTools</span>
+              <span className="text-lg font-bold tracking-tight">MyDevTools</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Save and organize your favorite website inspirations in one place.
@@ -41,7 +41,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} MyWebTools. All rights reserved.
+          © {new Date().getFullYear()} MyDevTools. All rights reserved.
         </div>
       </div>
     </footer>

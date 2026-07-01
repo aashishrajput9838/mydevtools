@@ -24,7 +24,7 @@ export function Navbar() {
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
               M
             </div>
-            <span className="text-xl font-bold tracking-tight">MyWebTools</span>
+            <span className="text-xl font-bold tracking-tight">MyDevTools</span>
           </Link>
         </div>
 
