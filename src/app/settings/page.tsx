@@ -35,7 +35,7 @@ export default function SettingsPage() {
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!auth.currentUser || !user) return;
+    if (!auth || !auth.currentUser || !db || !user) return;
 
     setLoading(true);
     try {

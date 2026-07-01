@@ -33,8 +33,8 @@ export const FirestoreService = {
    * Listen to real-time updates for a user's websites
    */
   subscribeToWebsites: (userId: string, callback: (websites: Website[]) => void) => {
-    if (!userId) {
-      console.warn("FirestoreService: userId is required for subscribeToWebsites");
+    if (!userId || !db) {
+      console.warn("FirestoreService: userId and db are required for subscribeToWebsites");
       return () => {};
     }
     
@@ -57,6 +57,10 @@ export const FirestoreService = {
    * Add a new website inspiration with validation
    */
   addWebsite: async (websiteData: Omit<Website, "id" | "createdAt">) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     // Validate required fields
     if (!websiteData.userId) {
       throw new Error("User ID is required");
@@ -91,6 +95,10 @@ export const FirestoreService = {
    * Update an existing website with validation
    */
   updateWebsite: async (id: string, data: Partial<Website>) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!id) {
       throw new Error("Website ID is required");
     }
@@ -134,6 +142,10 @@ export const FirestoreService = {
    * Delete a website
    */
   deleteWebsite: async (id: string) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!id) {
       throw new Error("Website ID is required");
     }
@@ -144,6 +156,10 @@ export const FirestoreService = {
    * Toggle favorite status
    */
   toggleFavorite: async (id: string, isFavorite: boolean) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!id) {
       throw new Error("Website ID is required");
     }
@@ -156,8 +172,8 @@ export const FirestoreService = {
    * Listen to real-time updates for a user's collections
    */
   subscribeToCollections: (userId: string, callback: (collections: Collection[]) => void) => {
-    if (!userId) {
-      console.warn("FirestoreService: userId is required for subscribeToCollections");
+    if (!userId || !db) {
+      console.warn("FirestoreService: userId and db are required for subscribeToCollections");
       return () => {};
     }
     
@@ -180,6 +196,10 @@ export const FirestoreService = {
    * Get all collections for a user (one-time fetch)
    */
   getCollections: async (userId: string): Promise<Collection[]> => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!userId) {
       throw new Error("User ID is required");
     }
@@ -196,6 +216,10 @@ export const FirestoreService = {
    * Add a new collection with validation
    */
   addCollection: async (userId: string, name: string, description: string) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!userId) {
       throw new Error("User ID is required");
     }
@@ -228,6 +252,10 @@ export const FirestoreService = {
    * Delete a collection
    */
   deleteCollection: async (id: string) => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!id) {
       throw new Error("Collection ID is required");
     }
@@ -238,6 +266,10 @@ export const FirestoreService = {
    * Get a specific collection by ID
    */
   getCollectionById: async (id: string): Promise<Collection | null> => {
+    if (!db) {
+      throw new Error("Firestore not initialized");
+    }
+
     if (!id) {
       throw new Error("Collection ID is required");
     }
@@ -254,8 +286,8 @@ export const FirestoreService = {
    * Get websites for a specific collection
    */
   subscribeToCollectionWebsites: (userId: string, collectionId: string, callback: (websites: Website[]) => void) => {
-    if (!userId || !collectionId) {
-      console.warn("FirestoreService: userId and collectionId are required");
+    if (!userId || !collectionId || !db) {
+      console.warn("FirestoreService: userId, collectionId and db are required");
       return () => {};
     }
     
