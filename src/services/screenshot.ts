@@ -31,10 +31,10 @@ export const ScreenshotService = {
       const hostname = urlObj.hostname;
 
       console.log("🚀 Launching Puppeteer for:", hostname);
-      
+
       // Check if we're in production (Vercel)
       const isProd = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
-      
+
       if (isProd) {
         // Vercel production: use @sparticuz/chromium
         browser = await puppeteerCore.launch({
@@ -63,17 +63,17 @@ export const ScreenshotService = {
 
       console.log("🌐 Navigating to:", url);
       try {
-        // We give it 6 seconds to load. If it doesn't finish, we catch the error 
+        // We give it 10 seconds to load. If it doesn't finish, we catch the error 
         // and take a screenshot of whatever is on the screen anyway!
-        await page.goto(url, { waitUntil: "networkidle2", timeout: 6000 });
+        await page.goto(url, { waitUntil: "networkidle2", timeout: 10000 });
       } catch (e) {
-        console.log("⚠️ Page load timed out after 6s, taking screenshot of current state...");
+        console.log("⚠️ Page load timed out after 10s, taking screenshot of current state...");
       }
 
       console.log("📸 Capturing screenshot...");
-      const screenshotBuffer = await page.screenshot({ 
-        type: "jpeg", 
-        quality: 80 
+      const screenshotBuffer = await page.screenshot({
+        type: "jpeg",
+        quality: 80
       });
 
       console.log("📄 Extracting metadata...");
